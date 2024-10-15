@@ -1,0 +1,206 @@
+@font-face {
+  font-family: wigrum-web;
+  font-style: normal;
+  font-weight: normal;
+  font-stretch: normal;
+  src: url("/fonts/wigrum-web-regular.woff2") format("woff2"), url("/fonts/wigrum-web-regular.woff") format("woff"); }
+
+@font-face {
+  font-family: wigrum-web;
+  font-style: italic;
+  font-weight: normal;
+  font-stretch: normal;
+  src: url("/fonts/wigrum-web-regular-italic.woff2") format("woff2"), url("/fonts/wigrum-web-regular-italic.woff") format("woff"); }
+
+@font-face {
+  font-family: wigrum-web;
+  font-style: normal;
+  font-weight: bold;
+  font-stretch: normal;
+  src: url("/fonts/wigrum-web-bold.woff2") format("woff2"), url("/fonts/wigrum-web-bold.woff") format("woff"); }
+
+@font-face {
+  font-family: wigrum-web;
+  font-style: italic;
+  font-weight: bold;
+  font-stretch: normal;
+  src: url("/fonts/wigrum-web-bold-italic.woff2") format("woff2"), url("/fonts/wigrum-web-bold-italic.woff") format("woff"); }
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+    transform: scale(1); }
+  to {
+    opacity: 0;
+    transform: scale(1.5); } }
+
+.form__item {
+  margin-bottom: 1rem; }
+
+.form__item label {
+  display: inline-block;
+  margin-bottom: 0.25rem;
+  font-weight: bold; }
+
+.form__item input:not([type='checkbox']),
+.form__item select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 0.063rem solid #ccc; }
+
+.form__item input[type='checkbox'] {
+  margin-right: 0.25rem; }
+
+.chart-container {
+  position: relative; }
+
+.section:not(:last-child) {
+  margin-bottom: 6rem; }
+
+.section__title {
+  margin-bottom: 2rem; }
+
+.code {
+  overflow-y: auto;
+  font-family: "Miriam Libre", "Courier New", courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  background-color: #fafafa; }
+
+.docs__subtitle {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: normal; }
+
+.docs__section {
+  margin-bottom: 2rem; }
+
+.docs__table th {
+  text-align: left; }
+
+.docs__table th,
+.docs__table td {
+  padding: 0.5rem 0.5rem; }
+
+.docs__table tbody tr {
+  background-color: #fafafa;
+  border-bottom: 0.063rem solid #ccc; }
+  .docs__table tbody tr:first-child {
+    border-top: 0.063rem solid #ccc; }
+
+.docs__example {
+  padding: 0.5rem;
+  border: 0.063rem solid #ccc; }
+
+.docs__methods {
+  padding: 1rem 0;
+  background-color: #fafafa; }
+
+.docs__methods-list {
+  position: sticky;
+  top: 64px;
+  padding-left: 1rem;
+  list-style: none; }
+
+.docs__methods-item {
+  margin-bottom: 1rem; }
+
+.docs__methods-tag {
+  display: inline-block;
+  width: 50px; }
+
+.docs__explanation {
+  padding: 0.5rem 0; }
+
+.label {
+  top: -1.5rem;
+  left: -0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-family: "Miriam Libre", "Courier New", courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 1.5rem;
+  background: #000; }
+
+.method {
+  padding: 0.25rem 0.5rem;
+  color: #fff;
+  background-color: #000; }
+
+.tabs {
+  position: relative; }
+  .tabs__panel {
+    order: 1;
+    width: 100%;
+    margin-top: -0.063rem;
+    border: 0.063rem solid #ccc; }
+    .tabs__panel pre {
+      height: 405px;
+      margin: 0; }
+  .tabs__panel--fixed-height {
+    height: 405px; }
+  .tabs__panel--compact {
+    padding: 1rem; }
+  .tabs__item {
+    position: relative;
+    z-index: 1;
+    margin-left: -0.063rem;
+    padding: 1rem;
+    font-weight: bold;
+    background: #eee;
+    border: 0.063rem solid #ccc; }
+    .tabs__item:hover, .tabs__item:focus {
+      text-decoration: underline; }
+    .tabs__item:first-of-type {
+      margin-left: 0; }
+    .tabs__item[aria-selected='true'] {
+      background: #fff;
+      border-bottom: 0.063rem solid #fff; }
+  .tabs__footer {
+    margin-top: -1px;
+    background-color: #fafafa;
+    border: 0.063rem solid #ccc; }
+    .tabs__footer pre {
+      margin: 0; }
+  .tabs__actions {
+    position: absolute;
+    top: 0;
+    right: 0; }
+    .tabs__actions .button {
+      height: 42px;
+      margin-bottom: 0; }
+
+.underlying {
+  margin-top: 1rem;
+  margin-bottom: 1rem; }
+  .underlying__indicator {
+    position: relative;
+    margin-left: 4px; }
+    .underlying__indicator:before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: -2px;
+      display: block;
+      width: 17px;
+      height: 17px;
+      border: 1px solid transparent;
+      border-radius: 50%;
+      transform-origin: center; }
+    .underlying__indicator.is-uptick:before {
+      border-color: #07ab5f;
+      animation: pulse 0.6s linear;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards; }
+    .underlying__indicator.is-downtick:before {
+      border-color: #07ab5f;
+      border-color: #f91a1f;
+      animation: pulse 0.6s linear;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards; }
+  .underlying__change.is-positive {
+    color: #07ab5f; }
+  .underlying__change.is-negative {
+    color: #f91a1f; }
+
+[hidden] {
+  display: none; }
