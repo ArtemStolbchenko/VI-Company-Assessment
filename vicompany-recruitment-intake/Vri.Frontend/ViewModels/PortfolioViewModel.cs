@@ -6,9 +6,9 @@ namespace Vri.Frontend.ViewModels;
 
 public class PortfolioViewModel
 { 
-    public PortfolioViewModel(IReadOnlyList<Position> positions, decimal cashPosition, IReadOnlyList<Quote> quotes)
+    public PortfolioViewModel(IReadOnlyList<Position> positions, decimal balance, IReadOnlyList<Quote> quotes)
     {
-        this.CashPosition = cashPosition;
+        this.Balance = balance;
         this.Positions = positions;
         this.Quotes = quotes;
     }
@@ -17,5 +17,5 @@ public class PortfolioViewModel
 
     public IReadOnlyList<Quote> Quotes { get; }
 
-    public decimal CashPosition { get; }
+    public decimal Balance { get; }
 }
