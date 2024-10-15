@@ -8,7 +8,7 @@ public class Portfolio
 {
     public Portfolio(decimal startCash, IEnumerable<Transaction> transactions)
     {
-        List<Transaction> transactionsList = transactions.ToList(); // prevent outer double enumeration
+        var transactionsList = transactions.ToList(); // prevent outer double enumeration
 
         // The logic and the values that Instruments and CashPosition depend on seem to be quite different
         // E.g., cash uses both types of transactions, while Instruments only use purchases 
@@ -23,7 +23,7 @@ public class Portfolio
         {
             decimal deltaCash = 0;
             foreach (Transaction transaction in transactions)
-            {
+            { // this is a simple iteration through the transactions, so plain foreach likely is faster than LINQ
                 decimal transactionCost = transaction.Quantity * transaction.PricePerUnit;
 
                 switch (transaction.Type)
@@ -74,15 +74,12 @@ public class Portfolio
         {
             var quantity = grouping.Sum(transaction =>
             {
-                switch (transaction.Type)
+                return transaction.Type switch
                 {
-                    case TransactionType.Buy:
-                        return transaction.Quantity;
-                    case TransactionType.Sell:
-                        return -transaction.Quantity;
-                    default: // here in case if a new transaction type is ever added
-                        throw new ArgumentException("Unknown transaction type!");
-                }
+                    TransactionType.Buy => transaction.Quantity,
+                    TransactionType.Sell => -transaction.Quantity,
+                    _ => throw new ArgumentException("Unknown transaction type!") // here in case if a new transaction type is ever added
+                };
             });
             return quantity;
         }
@@ -91,13 +88,10 @@ public class Portfolio
             Console.WriteLine($"Failed to calculate the quantity: {exception.Message}");
             return 0;
         }
-
     }
 
     private decimal CalculateAveragePrice(IGrouping<string, Transaction> grouping)
     {
-        decimal averagePrice;
-
         // The task states "weighted average PURCHASE price"
         // So I am assuming that only TransactionType.Buy counts towards the average
         (int boughtAmount, decimal totalPrice) = grouping.Where(transaction => transaction.Type == TransactionType.Buy)
@@ -110,7 +104,7 @@ public class Portfolio
                 return cumulative;
             });
 
-        averagePrice = totalPrice / boughtAmount;
+        var averagePrice = totalPrice / boughtAmount;
         return averagePrice;
     }
     public decimal CashPosition { get; set; }
