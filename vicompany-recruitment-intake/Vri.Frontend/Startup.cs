@@ -13,7 +13,7 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.TryAddTransient<IQuotesRepository, DummyQuotesRepository>();
+        services.TryAddTransient<IQuotesRepository, TicklyQuotesRepository>();
 
         services.AddControllersWithViews().AddRazorRuntimeCompilation();
     }
