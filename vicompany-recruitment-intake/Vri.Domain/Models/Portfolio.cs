@@ -10,6 +10,42 @@ public class Portfolio
     {
         List<Transaction> transactionsList = transactions.ToList(); // prevent outer double enumeration
 
+        // The logic and the values that Instruments and CashPosition depend on seem to be quite different
+        // E.g., cash uses both types of transactions, while Instruments only use purchases 
+        // Also separating the functions compliments the Single-responsibility principle
+        this.CashPosition = startCash + CalculateCashPosition(transactionsList);
+        this.Instruments = CountInstruments(transactionsList);
+    }
+
+    private decimal CalculateCashPosition(IEnumerable<Transaction> transactions)
+    {
+        try
+        {
+            decimal deltaCash = 0;
+            foreach (Transaction transaction in transactions)
+            {
+                decimal transactionCost = transaction.Quantity * transaction.PricePerUnit;
+
+                switch (transaction.Type)
+                {
+                    case TransactionType.Buy:
+                        deltaCash -= transactionCost;
+                        break;
+                    case TransactionType.Sell:
+                        deltaCash += transactionCost;
+                        break;
+                    default: // here in case if a new transaction type is ever added
+                        throw new ArgumentException("Unknown transaction type!");
+                }
+            }
+
+            return this.CashPosition += deltaCash;
+        }
+        catch (ArgumentException exception)
+        {
+            Console.WriteLine($"Failed to calculate the cash position: {exception.Message}");
+            return this.CashPosition;
+        }
     }
 
     private List<Position> CountInstruments(IEnumerable<Transaction> transactions)
