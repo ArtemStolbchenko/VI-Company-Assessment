@@ -15,7 +15,6 @@ public class PortfolioViewModel
 
     public IReadOnlyList<Position> Positions { get; }
 
-    //Either I'm missing finance-related knowledge, or the connection between "Quotes" and "AEX" is non-trivial
     public IReadOnlyList<Quote> Quotes { get; }
 
     public decimal CashPosition { get; }
