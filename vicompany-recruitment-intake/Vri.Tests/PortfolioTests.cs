@@ -21,7 +21,7 @@ public class PortfolioTests
         var result = new Portfolio(0, transactions);
 
         // Assert
-        result.Instruments.Count.ShouldBe(2);
+        result.Positions.Count.ShouldBe(2);
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public class PortfolioTests
         var result = new Portfolio(0, transactions);
 
         // Assert
-        result.Instruments.Count.ShouldBe(1);
+        result.Positions.Count.ShouldBe(1);
     }
 
     [Fact]
@@ -47,9 +47,9 @@ public class PortfolioTests
         var result = new Portfolio(0, transactions);
 
         // Assert 
-        result.Instruments[0].Isin.ShouldBe("US88579Y1010");
-        result.Instruments[0].Price.ShouldBeInRange(114.7395m, 114.7396m);
-        result.Instruments[0].Quantity.ShouldBe(35);
+        result.Positions[0].Isin.ShouldBe("US88579Y1010");
+        result.Positions[0].Price.ShouldBeInRange(114.7395m, 114.7396m);
+        result.Positions[0].Quantity.ShouldBe(35);
     }
 
     [Fact]
@@ -62,10 +62,10 @@ public class PortfolioTests
         var result = new Portfolio(0, transactions);
 
         // Assert 
-        result.Instruments.Count.ShouldBe(1);
-        result.Instruments[0].Isin.ShouldBe("US88579Y1010");
-        result.Instruments[0].Price.ShouldBe(123.1m);
-        result.Instruments[0].Quantity.ShouldBe(23);
+        result.Positions.Count.ShouldBe(1);
+        result.Positions[0].Isin.ShouldBe("US88579Y1010");
+        result.Positions[0].Price.ShouldBe(123.1m);
+        result.Positions[0].Quantity.ShouldBe(23);
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public class PortfolioTests
         var result = new Portfolio(10000, transactions);
 
         // Assert
-        result.CashPosition.ShouldBe(4729.2m);
+        result.Balance.ShouldBe(4729.2m);
     }
 
     [Fact]
@@ -91,7 +91,7 @@ public class PortfolioTests
         var result = new Portfolio(10000, transactions);
 
         // Assert
-        result.CashPosition.ShouldBe(7177.7m);
+        result.Balance.ShouldBe(7177.7m);
     }
 
     private IEnumerable<Transaction> GetTransactionSet1()

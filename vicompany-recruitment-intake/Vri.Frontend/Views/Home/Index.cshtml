@@ -56,7 +56,7 @@
             <div class="cell cell--1 cell--medium-1/4">
                 <div class="positions__section">
                     <h3 class="positions__subtitle">Positions</h3>
-                    <h5>In wallet @Model.CashPosition.ToString("C")</h5>
+                    <h5>In wallet @Model.Balance.ToString("C")</h5>
                     <table class="positions__table">
                         <thead>
                             <tr>
@@ -71,7 +71,7 @@
                             <tr>
                                 <td>@position.Isin</td>
                                 <td>@position.Quantity</td>
-                                <td>@position.Price</td>
+                                <td>@decimal.Round(position.Price, 4)</td> <!--Makes the field much nicer-->
                             </tr>
                             }
                         </tbody>
@@ -80,7 +80,7 @@
             </div>
             <div class="cell cell--1 cell--medium-1/4">
                 <div class="quotes__section">
-                    <h3 class="quotes__subtitle">Latest AEX</h3>
+                    <h3 class="quotes__subtitle">Latest AEX Quotes</h3>
                     <table class="quotes__table">
                         <thead>
                             <tr>

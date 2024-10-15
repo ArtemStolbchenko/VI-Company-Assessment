@@ -21,9 +21,9 @@ public class HomeController : Controller
     {
         var positionRepo = new FakeTransactionRepository();
         var portfolioRepo = new PortfolioService(positionRepo);
-        var positions = portfolioRepo.GetForUser(10000, "test1");
+        var portfolio = portfolioRepo.GetForUser(10000, "test1");
         var quotes = this.quotesRepository.GetQuotesForIsin("AEX");
             
-        return View(new PortfolioViewModel(positions.Instruments, positions.CashPosition, quotes));
+        return View(new PortfolioViewModel(portfolio.Positions, portfolio.Balance, quotes));
     }
 }
