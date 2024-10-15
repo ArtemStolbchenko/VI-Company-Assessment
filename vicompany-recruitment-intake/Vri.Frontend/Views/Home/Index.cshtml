@@ -71,7 +71,7 @@
                             <tr>
                                 <td>@position.Isin</td>
                                 <td>@position.Quantity</td>
-                                <td>@position.Price</td>
+                                <td>@decimal.Round(position.Price, 4)</td> <!--Makes the field much nicer-->
                             </tr>
                             }
                         </tbody>
