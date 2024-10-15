@@ -1,4 +1,5 @@
-﻿@model Vri.Frontend.ViewModels.PortfolioViewModel
+﻿@using System.Globalization
+@model Vri.Frontend.ViewModels.PortfolioViewModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +92,7 @@
                             @foreach (var quote in Model.Quotes)
                             {
                                 <tr>
-                                    <td>@quote.Date</td>
+                                    <td>@quote.Date.ToString("O", CultureInfo.InvariantCulture)</td> <!--ISO 8601-->
                                     <td>@quote.Rate</td>
                                 </tr>
                             }
