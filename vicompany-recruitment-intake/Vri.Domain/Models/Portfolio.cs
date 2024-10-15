@@ -6,18 +6,18 @@ namespace Vri.Domain.Models;
 
 public class Portfolio
 {
-    public Portfolio(decimal startCash, IEnumerable<Transaction> transactions)
+    public Portfolio(decimal startingBalance, IEnumerable<Transaction> transactions)
     {
         var transactionsList = transactions.ToList(); // prevent outer double enumeration
 
-        // The logic and the values that Instruments and CashPosition depend on seem to be quite different
-        // E.g., cash uses both types of transactions, while Instruments only use purchases 
+        // The logic and the values that Positions and Balance depend on seem to be quite different
+        // E.g., cash uses both types of transactions, while Positions only use purchases 
         // Also separating the functions compliments the Single-responsibility principle
-        this.CashPosition = startCash + CalculateCashPosition(transactionsList);
-        this.Instruments = CountInstruments(transactionsList);
+        this.Balance = startingBalance + CalculateBalance(transactionsList);
+        this.Positions = CountInstruments(transactionsList);
     }
 
-    private decimal CalculateCashPosition(IEnumerable<Transaction> transactions)
+    private decimal CalculateBalance(IEnumerable<Transaction> transactions)
     {
         try
         {
@@ -39,12 +39,12 @@ public class Portfolio
                 }
             }
 
-            return this.CashPosition += deltaCash;
+            return this.Balance += deltaCash;
         }
         catch (ArgumentException exception)
         {
             Console.WriteLine($"Failed to calculate the cash position: {exception.Message}");
-            return this.CashPosition;
+            return this.Balance;
         }
     }
 
@@ -54,7 +54,7 @@ public class Portfolio
             .Select((grouping) =>
             {
                 // separated for readability
-                var quantity = CalculateQuantity(grouping); 
+                var quantity = CalculatePositionsQuantity(grouping); 
                 var averagePrice = CalculateAveragePrice(grouping);
 
                 return new Position
@@ -68,7 +68,7 @@ public class Portfolio
         return positions;
     }
 
-    private int CalculateQuantity(IGrouping<string, Transaction> grouping)
+    private int CalculatePositionsQuantity(IGrouping<string, Transaction> grouping)
     {
         try
         {
@@ -107,7 +107,7 @@ public class Portfolio
         var averagePrice = totalPrice / boughtAmount;
         return averagePrice;
     }
-    public decimal CashPosition { get; set; }
+    public decimal Balance { get; set; }
 
-    public IReadOnlyList<Position> Instruments { get; set; } = new List<Position>(); 
+    public IReadOnlyList<Position> Positions { get; set; } = new List<Position>(); 
 }
