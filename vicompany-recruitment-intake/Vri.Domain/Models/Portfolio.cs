@@ -39,7 +39,7 @@ public class Portfolio
                 }
             }
 
-            return this.Balance += deltaCash;
+            return deltaCash;
         }
         catch (ArgumentException exception)
         {
